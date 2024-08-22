@@ -3,6 +3,7 @@ import { auth, db } from "../../lib/firebase";
 import { useChatStore } from "../../lib/chatStore";
 import { useUserStore } from "../../lib/userStore";
 import { arrayRemove, arrayUnion, doc, updateDoc } from "firebase/firestore";
+import { OverlayScrollbarsComponent } from "overlayscrollbars-react";
 
 const Detail = () => {
   const {
@@ -37,81 +38,83 @@ const Detail = () => {
         <h2>{user?.username}</h2>
         <p>sdfdgf df dfg sdfg sfgfs f</p>
       </div>
-      <div className="infoDetail">
-        <div className="optionDetail">
-          <div className="titleDetail">
-            <span>Chat Settings</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
-        <div className="optionDetail">
-          <div className="titleDetail">
-            <span>Chat Settings</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
-        <div className="optionDetail">
-          <div className="titleDetail">
-            <span>Chat Settings</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
-        <div className="optionDetail">
-          <div className="titleDetail">
-            <span>Privacy & Help</span>
-            <img src="./arrowUp.png" alt="" />
-          </div>
-        </div>
-        <div className="optionDetail">
-          <div className="titleDetail">
-            <span>Shared photos</span>
-            <img src="./arrowDown.png" alt="" />
-          </div>
-          <div className="photosDetail">
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="./theme.png" alt="" />
-                <span>photo_2024_2.png</span>
-              </div>
-              <img className="downloadImg" src="./download.png" alt="" />
-            </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="./theme.png" alt="" />
-                <span>photo_2024_2.png</span>
-              </div>
-              <img className="downloadImg" src="./download.png" alt="" />
-            </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="./theme.png" alt="" />
-                <span>photo_2024_2.png</span>
-              </div>
-              <img className="downloadImg" src="./download.png" alt="" />
-            </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="./theme.png" alt="" />
-                <span>photo_2024_2.png</span>
-              </div>
-              <img className="downloadImg" src="./download.png" alt="" />
-            </div>
-            <div className="photoItem">
-              <div className="photoDetail">
-                <img src="./theme.png" alt="" />
-                <span>photo_2024_2.png</span>
-              </div>
-              <img className="downloadImg" src="./download.png" alt="" />
+      <OverlayScrollbarsComponent>
+        <div className="infoDetail">
+          <div className="optionDetail">
+            <div className="titleDetail">
+              <span>Chat Settings</span>
+              <img src="./arrowUp.png" alt="" />
             </div>
           </div>
-        </div>
-        <div className="optionDetail">
-          <div className="titleDetail">
-            <span>Shared Files</span>
-            <img src="./arrowUp.png" alt="" />
+          <div className="optionDetail">
+            <div className="titleDetail">
+              <span>Chat Settings</span>
+              <img src="./arrowUp.png" alt="" />
+            </div>
+          </div>
+          <div className="optionDetail">
+            <div className="titleDetail">
+              <span>Chat Settings</span>
+              <img src="./arrowUp.png" alt="" />
+            </div>
+          </div>
+          <div className="optionDetail">
+            <div className="titleDetail">
+              <span>Privacy & Help</span>
+              <img src="./arrowUp.png" alt="" />
+            </div>
+          </div>
+          <div className="optionDetail">
+            <div className="titleDetail">
+              <span>Shared photos</span>
+              <img src="./arrowDown.png" alt="" />
+            </div>
+            <div className="photosDetail">
+              <div className="photoItem">
+                <div className="photoDetail">
+                  <img src="./theme.png" alt="" />
+                  <span>photo_2024_2.png</span>
+                </div>
+                <img className="downloadImg" src="./download.png" alt="" />
+              </div>
+              <div className="photoItem">
+                <div className="photoDetail">
+                  <img src="./theme.png" alt="" />
+                  <span>photo_2024_2.png</span>
+                </div>
+                <img className="downloadImg" src="./download.png" alt="" />
+              </div>
+              <div className="photoItem">
+                <div className="photoDetail">
+                  <img src="./theme.png" alt="" />
+                  <span>photo_2024_2.png</span>
+                </div>
+                <img className="downloadImg" src="./download.png" alt="" />
+              </div>
+              <div className="photoItem">
+                <div className="photoDetail">
+                  <img src="./theme.png" alt="" />
+                  <span>photo_2024_2.png</span>
+                </div>
+                <img className="downloadImg" src="./download.png" alt="" />
+              </div>
+              <div className="photoItem">
+                <div className="photoDetail">
+                  <img src="./theme.png" alt="" />
+                  <span>photo_2024_2.png</span>
+                </div>
+                <img className="downloadImg" src="./download.png" alt="" />
+              </div>
+            </div>
+          </div>
+          <div className="optionDetail">
+            <div className="titleDetail">
+              <span>Shared Files</span>
+              <img src="./arrowUp.png" alt="" />
+            </div>
           </div>
         </div>
-      </div>
+      </OverlayScrollbarsComponent>
       <div className="blockBtn">
         <button className="blockUser" onClick={handleBlock}>
           {isCurrentUserBlocked

@@ -6,6 +6,10 @@ import { useUserStore } from "./userStore";
 export const useChatStore = create((set) => ({
   chatId: null,
   user: null,
+  img: {
+    file: null,
+    url: "",
+  },
   isCurrentUserBlocked: false,
   isReceiverUserBlocked: false,
   changeChat: (chatId, user) => {
@@ -38,6 +42,12 @@ export const useChatStore = create((set) => ({
     set((state) => ({
       ...state,
       isReceiverUserBlocked: !state.isReceiverUserBlocked,
+    }));
+  },
+  changeImg: (img) => {
+    set((state) => ({
+      ...state,
+      img: img,
     }));
   },
 }));

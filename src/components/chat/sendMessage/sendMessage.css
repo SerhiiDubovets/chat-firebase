@@ -1,0 +1,64 @@
+.bottom {
+  padding: 20px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid #dddddd35;
+  gap: 20px;
+}
+
+.iconsBottom {
+  display: flex;
+  gap: 20px;
+}
+
+.iconsBottom img {
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.inputMessage {
+  flex: 1;
+  background-color: rgba(17, 25, 40, 0.5);
+  border: none;
+  outline: none;
+  color: white;
+  padding: 20px;
+  border-radius: 10px;
+  font-size: 16px;
+}
+
+.inputMessage:disabled {
+  cursor: not-allowed;
+}
+
+.emoji {
+  position: relative;
+}
+
+.picker {
+  position: absolute;
+  bottom: 50px;
+  left: 0;
+}
+
+.emoji img {
+  width: 20px;
+  height: 20px;
+}
+
+.sendButton {
+  background-color: #5783fe;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.sendButton:disabled {
+  background-color: #5784fea3;
+  cursor: not-allowed;
+}

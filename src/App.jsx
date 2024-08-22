@@ -8,6 +8,7 @@ import Notification from "./components/notification/Notification";
 import { useChatStore } from "./lib/chatStore";
 import { auth } from "./lib/firebase";
 import { useUserStore } from "./lib/userStore";
+import "overlayscrollbars/overlayscrollbars.css";
 
 const App = () => {
   const { currentUser, isLoading, fetchUserInfo } = useUserStore();
@@ -30,7 +31,8 @@ const App = () => {
       {currentUser ? (
         <>
           <List />
-          {chatId && <Chat />}
+          {/* {chatId && <Chat />} */}
+          <Chat />
           {chatId && <Detail />}
         </>
       ) : (
