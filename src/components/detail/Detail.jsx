@@ -36,7 +36,7 @@ const Detail = () => {
       <div className="userDetail">
         <img src={user?.avatar || "./avatar.png"} alt="" />
         <h2>{user?.username}</h2>
-        <p>sdfdgf df dfg sdfg sfgfs f</p>
+        <p>Last seen ...</p>
       </div>
       <OverlayScrollbarsComponent>
         <div className="infoDetail">
