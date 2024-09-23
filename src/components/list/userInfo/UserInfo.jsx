@@ -1,24 +1,20 @@
 import { useUserStore } from "../../../lib/userStore";
-import "./userInfo.css";
+import { UserInfoStyle, User, UserIcons, UserImg } from "./userInfo.style";
 
 const UserInfo = () => {
   const { currentUser, isLoading, fetchUserInfo } = useUserStore();
   return (
-    <div className="userInfo">
-      <div className="user">
-        <img
-          className="user-img"
-          src={currentUser.avatar || "./avatar.png"}
-          alt="avatar"
-        />
+    <UserInfoStyle>
+      <User>
+        <UserImg src={currentUser.avatar || "./avatar.png"} alt="avatar" />
         <h2>{currentUser.username}</h2>
-      </div>
-      <div className="icons">
+      </User>
+      <UserIcons>
         <img src="./more.png" alt="" />
         <img src="./video.png" alt="" />
         <img src="./edit.png" alt="" />
-      </div>
-    </div>
+      </UserIcons>
+    </UserInfoStyle>
   );
 };
 

@@ -2,18 +2,22 @@ import { useState } from "react";
 import { useChatStore } from "../../../lib/chatStore";
 import { useUserStore } from "../../../lib/userStore";
 import EmojiPicker from "emoji-picker-react";
-import "./sendMessage.css";
+
 import upload from "../../../lib/upload";
 import { arrayUnion, doc, getDoc, updateDoc } from "firebase/firestore";
 import { db } from "../../../lib/firebase";
+import {
+  BlockSend,
+  IconsSend,
+  InputSend,
+  Picker,
+  BlockEmoji,
+  ButtonSend,
+} from "./sendMessage.style";
 
 const SendMessage = () => {
   const [openEmoji, setOpenEmoji] = useState(false);
   const [text, setText] = useState("");
-  //   const [img, setImg] = useState({
-  //     file: null,
-  //     url: "",
-  //   });
 
   const {
     chatId,
@@ -99,8 +103,8 @@ const SendMessage = () => {
   };
 
   return (
-    <div className="bottom">
-      <div className="iconsBottom">
+    <BlockSend>
+      <IconsSend>
         <label htmlFor="file">
           <img src="./img.png" alt="" />
         </label>
@@ -112,28 +116,26 @@ const SendMessage = () => {
         />
         <img src="./camera.png" alt="" />
         <img src="./mic.png" alt="" />
-      </div>
-      <input
-        className="inputMessage"
+      </IconsSend>
+      <InputSend
         type="text"
         placeholder="Type a message..."
         value={text}
         onChange={handleChange}
         disabled={isCurrentUserBlocked || isReceiverUserBlocked}
       />
-      <div className="emoji">
+      <BlockEmoji>
         <img src="./emoji.png" alt="" onClick={handleOpenEmoji} />
-        <div className="picker">
+        <Picker>
           <EmojiPicker open={openEmoji} onEmojiClick={handleEmoji} />
-        </div>
-      </div>
-      <button
-        className="sendButton"
+        </Picker>
+      </BlockEmoji>
+      <ButtonSend
         onClick={handleSend}
         disabled={isCurrentUserBlocked || isReceiverUserBlocked}>
         Send
-      </button>
-    </div>
+      </ButtonSend>
+    </BlockSend>
   );
 };
 

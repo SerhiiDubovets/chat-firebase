@@ -1,4 +1,6 @@
-.bottom {
+import styled from "styled-components";
+
+export const BlockSend = styled.div`
   padding: 20px;
   margin: auto;
   display: flex;
@@ -6,20 +8,20 @@
   justify-content: space-between;
   border-top: 1px solid #dddddd35;
   gap: 20px;
-}
+`;
 
-.iconsBottom {
+export const IconsSend = styled.div`
   display: flex;
   gap: 20px;
-}
 
-.iconsBottom img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
+  & img {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+`;
 
-.inputMessage {
+export const InputSend = styled.input`
   flex: 1;
   background-color: rgba(17, 25, 40, 0.5);
   border: none;
@@ -28,37 +30,38 @@
   padding: 20px;
   border-radius: 10px;
   font-size: 16px;
-}
 
-.inputMessage:disabled {
-  cursor: not-allowed;
-}
+  &:disabled {
+    cursor: not-allowed;
+  }
+`;
 
-.emoji {
+export const BlockEmoji = styled.div`
   position: relative;
-}
 
-.picker {
+  & img {
+    width: 20px;
+    height: 20px;
+  }
+`;
+
+export const Picker = styled.div`
   position: absolute;
   bottom: 50px;
   left: 0;
-}
+  z-index: 1;
+`;
 
-.emoji img {
-  width: 20px;
-  height: 20px;
-}
-
-.sendButton {
+export const ButtonSend = styled.button`
   background-color: #5783fe;
   color: white;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-}
 
-.sendButton:disabled {
-  background-color: #5784fea3;
-  cursor: not-allowed;
-}
+  &:disabled {
+    background-color: #5784fea3;
+    cursor: not-allowed;
+  }
+`;

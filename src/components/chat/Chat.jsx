@@ -11,7 +11,19 @@ import MessagesList from "./messagesList/MessagesList";
 
 import SendMessage from "./sendMessage/SendMessage";
 
-import "./chat.css";
+import { MessageStyle } from "./messagesList/messagesList.style";
+import {
+  MessageBlockStyle,
+  BlockMessageStyle,
+  CenterChatStyle,
+  SelectChatStyle,
+  ChatStyle,
+  TopChatStyle,
+  UserStyle,
+  TextStyle,
+  IconsStyle,
+} from "./chat.style";
+
 const Chat = () => {
   const [chat, setChat] = useState([]);
 
@@ -37,44 +49,44 @@ const Chat = () => {
   }, [chatId]);
 
   return (
-    <div className="chat">
-      <div className="top">
-        <div className="user">
+    <ChatStyle>
+      <TopChatStyle>
+        <UserStyle>
           <img src={user?.avatar || "./avatar.png"} alt="" />
-          <div className="texts">
+          <TextStyle>
             <span>{user?.username}</span>
             <p>Last seen ...</p>
-          </div>
-        </div>
-        <div className="icons">
+          </TextStyle>
+        </UserStyle>
+        <IconsStyle>
           <img src="./phone.png" alt="" />
           <img src="./video.png" alt="" />
           <img src="./info.png" alt="" />
-        </div>
-      </div>
-      <div className="center">
+        </IconsStyle>
+      </TopChatStyle>
+      <CenterChatStyle>
         <OverlayScrollbarsComponent>
           {chatId ? (
-            <div className="blockMessage">
+            <BlockMessageStyle>
               <MessagesList chat={chat} currentUser={currentUser} />
-            </div>
+            </BlockMessageStyle>
           ) : (
-            <div className="centerText">
+            <SelectChatStyle>
               <p>Select a chat to start a conversation.</p>
-            </div>
+            </SelectChatStyle>
           )}
           {img.url && (
-            <div className="message own">
-              <div className="textsCenter">
+            <MessageStyle own>
+              <MessageBlockStyle>
                 <img src={img.url} alt="" />
-              </div>
-            </div>
+              </MessageBlockStyle>
+            </MessageStyle>
           )}
           <div ref={endRef}></div>
         </OverlayScrollbarsComponent>
-      </div>
+      </CenterChatStyle>
       <SendMessage />
-    </div>
+    </ChatStyle>
   );
 };
 

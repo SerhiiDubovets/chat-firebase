@@ -1,4 +1,5 @@
-import { async } from "@firebase/util";
+import { useState } from "react";
+
 import {
   arrayUnion,
   collection,
@@ -10,10 +11,17 @@ import {
   updateDoc,
   where,
 } from "firebase/firestore";
-import { useState } from "react";
+
 import { db } from "../../../../lib/firebase";
 import { useUserStore } from "../../../../lib/userStore";
-import "./addUser.css";
+
+import {
+  AddUserStyle,
+  FormStyle,
+  UserStyle,
+  UserDetailStyle,
+  AddUserBtnStyle,
+} from "./addUser.style";
 
 const AddUser = () => {
   const [user, setUser] = useState(null);
@@ -72,23 +80,21 @@ const AddUser = () => {
   };
 
   return (
-    <div className="addUser">
-      <form className="addUserForm" onSubmit={handleSearch}>
+    <AddUserStyle>
+      <FormStyle onSubmit={handleSearch}>
         <input type="text" placeholder="Username" name="username" />
-        <button className="searchBtn">Search</button>
-      </form>
+        <button>Search</button>
+      </FormStyle>
       {user && (
-        <div className="userAdd">
-          <div className="userAddDetail">
+        <UserStyle>
+          <UserDetailStyle>
             <img src={user.avatar || "./avatar.png"} alt="" />
             <span>{user.username}</span>
-          </div>
-          <button className="addUserBtn" onClick={handleAdd}>
-            Add User
-          </button>
-        </div>
+          </UserDetailStyle>
+          <AddUserBtnStyle onClick={handleAdd}>Add User</AddUserBtnStyle>
+        </UserStyle>
       )}
-    </div>
+    </AddUserStyle>
   );
 };
 
