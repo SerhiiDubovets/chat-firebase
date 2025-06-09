@@ -1,0 +1,79 @@
+import styled from "styled-components";
+
+export const LoginStyle = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 100px;
+`;
+
+export const SingUpStyle = styled.div`
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
+
+export const SeparatorStyle = styled.div`
+  height: 80%;
+  width: 2px;
+  background-color: #dddddd35;
+`;
+
+export const FormStyle = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+
+  & input {
+    padding: 20px;
+    border: none;
+    outline: none;
+    background-color: rgba(17, 25, 40, 0.6);
+    color: white;
+    border-radius: 5px;
+  }
+
+  & label {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    cursor: pointer;
+    text-decoration: underline;
+  }
+
+  & button {
+    width: 100%;
+    padding: 20px;
+    border: none;
+    background-color: #1f8ef1;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: 500;
+
+    &:disabled {
+      cursor: not-allowed;
+      background-color: #1f8ff181;
+    }
+  }
+
+  & img {
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    object-fit: cover;
+    opacity: 0.6;
+  }
+
+  & p {
+    width: 220px;
+    color: #ff0303cc;
+    text-align: center;
+  }
+`;

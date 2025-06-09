@@ -4,6 +4,7 @@ import { db } from "./firebase";
 
 export const useUserStore = create((set) => ({
   currentUser: null,
+  userId: null,
   isLoading: true,
   fetchUserInfo: async (uid) => {
     if (!uid) return set({ currentUser: null, isLoading: false });
@@ -23,6 +24,6 @@ export const useUserStore = create((set) => ({
     }
   },
   increasePopulation: () => set((state) => ({ bears: state.bears + 1 })),
-  removeAllBears: () => set({ bears: 0 }),
+  changeCurrentUser: (userId) => set({ userId: userId }),
   updateBears: (newBears) => set({ bears: newBears }),
 }));

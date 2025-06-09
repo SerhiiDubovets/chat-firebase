@@ -15,7 +15,7 @@ export const AddUserStyle = styled.div`
   z-index: 50;
 `;
 
-export const FormStyle = styled.div`
+export const FormStyle = styled.form`
   display: flex;
   gap: 20px;
 

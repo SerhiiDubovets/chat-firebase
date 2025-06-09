@@ -26,6 +26,7 @@ import {
 const AddUser = () => {
   const [user, setUser] = useState(null);
   const { currentUser } = useUserStore();
+
   const handleSearch = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
