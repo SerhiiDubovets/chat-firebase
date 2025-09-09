@@ -7,7 +7,7 @@ import {
 } from "firebase/auth";
 import { auth, db } from "../../lib/firebase.js";
 import { doc, setDoc } from "firebase/firestore";
-import upload from "../../lib/upload";
+import upload from "../../lib/upload.js";
 
 import { LoginStyle } from "./login.style";
 import SignIn from "../signIn/SignIn.jsx";
