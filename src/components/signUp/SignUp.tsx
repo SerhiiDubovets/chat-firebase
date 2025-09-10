@@ -1,6 +1,5 @@
 import {
   FacebookAuthProvider,
-  getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
@@ -19,7 +18,7 @@ import InputField from "@/components/inputField/InputField";
 import { SocialAuthBlock } from "@/components/socialAuthBlock/SocialAuthBlock";
 import { useAvatar } from "@/hooks/useAvatar";
 import { registerUser } from "@/lib/authService";
-import { db } from "@/lib/firebase";
+import { auth, db } from "@/lib/firebase";
 import { useUserStore } from "@/store/userStore";
 
 import { SignUpFormValues } from "@/types/auth.types";
@@ -68,7 +67,7 @@ const SignUp = () => {
       default:
         return;
     }
-    const auth = getAuth();
+    // const auth = getAuth();
 
     try {
       const result = await signInWithPopup(auth, provider);
@@ -85,7 +84,7 @@ const SignUp = () => {
           email: email,
           avatarFile: photoURL || null,
           id: userId,
-          blocked: false,
+          blocked: [],
           about: "",
         };
 

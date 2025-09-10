@@ -31,11 +31,7 @@ const App = () => {
       unSub();
     };
   }, [fetchUserInfo]);
-  console.log("перед LoadingMain:", isLoading);
-  console.log("перед LoadingMain:", userLoading);
   if (isLoading || userLoading) return <LoadingMain />;
-  console.log("после LoadingMain:", isLoading);
-  console.log("после LoadingMain:", userLoading);
   return (
     <>
       <ToastContainer position="bottom-right" />

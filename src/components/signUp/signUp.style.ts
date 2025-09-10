@@ -13,16 +13,12 @@ export const LinkStyle = styled(Link)`
 
   font-weight: 600;
   text-decoration: underline;
-  font-size: 1rem;
   text-underline-offset: 3px;
 
-  border: none;
   background-color: transparent;
   color: hsl(166, 71.9%, 37.6%);
 
   transition: 0.3s ease-in-out;
-
-  cursor: pointer;
 
   &:hover,
   &:focus {

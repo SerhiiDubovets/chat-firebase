@@ -1,7 +1,6 @@
 import {
   FacebookAuthProvider,
   fetchSignInMethodsForEmail,
-  getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -35,17 +34,24 @@ const SignIn = () => {
     setError,
     reset,
     formState: { errors, touchedFields, isSubmitted, isSubmitting },
-  } = useForm({
+  } = useForm<SignUpFormValues>({
     criteriaMode: "all",
   });
-  const { setCurrentUser, fetchUserInfo, changeCurrentUser, setUserId } =
-    useUserStore();
+  const { setCurrentUser, fetchUserInfo } = useUserStore();
 
   const handleLogin = async (data: SignUpFormValues) => {
     const { email, password } = data;
     try {
+      console.log("auth.app.name", auth.app.name);
+      console.log(auth);
+      console.log("auth.currentUser?.email", auth.currentUser);
       const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      const methods = await fetchSignInMethodsForEmail(
+        auth,
+        "sergio.dubovets@gmail.com"
+      );
       console.log(signInMethods);
+      console.log(methods);
       await signInWithEmailAndPassword(auth, email, password);
     } catch (err: any) {
       const errorCode = err.code;
@@ -86,7 +92,7 @@ const SignIn = () => {
       default:
         return;
     }
-    const auth = getAuth();
+    // const auth = getAuth();
 
     try {
       const result = await signInWithPopup(auth, provider);
@@ -94,7 +100,10 @@ const SignIn = () => {
       const user = result.user;
 
       const userId = user.uid;
+
       const { displayName, email, photoURL } = user;
+      const signInMethods = await fetchSignInMethodsForEmail(auth, email);
+      console.log(signInMethods);
 
       const userRef = doc(db, "users", userId);
       const userSnap = await getDoc(userRef);
@@ -104,14 +113,13 @@ const SignIn = () => {
           email: email,
           avatar: photoURL || null,
           id: userId,
-          blocked: false,
+          blocked: [],
           about: "",
         };
 
         await setDoc(userRef, newUser);
         await setDoc(doc(db, "userchats", userId), { chats: [] });
         setCurrentUser(newUser);
-        // await fetchUserInfo(userId);
       } else {
         await fetchUserInfo(userId);
         console.log("Пользователь уже существует, просто логинимся");

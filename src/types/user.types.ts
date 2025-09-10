@@ -1,8 +1,8 @@
 export interface ChatUser {
   id: string;
-  blocked: boolean;
-  email: string;
-  username: string;
+  blocked: string[];
+  email: string | null;
+  username: string | null;
   avatar: string | null;
   phone?: string | null;
   about?: string;
