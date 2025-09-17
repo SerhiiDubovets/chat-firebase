@@ -17,9 +17,9 @@ export const SkeletonStyle = styled.div<SkeletonStyleProps>`
 
   background: linear-gradient(90deg, #c7c7c7 25%, #e3e3e3 50%, #c7c7c7 75%);
   background-size: 200% 100%;
-  border-radius: 4px;
+  border-radius: ${(p) => p.$radius};
 
-  animation: ${shimmer} 1.5s ease-in-out infinite;
+  animation: ${shimmer} ${(p) => p.$speed} ease-in-out infinite;
 
   opacity: 0.7;
 `;

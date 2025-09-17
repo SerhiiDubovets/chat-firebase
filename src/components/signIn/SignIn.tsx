@@ -1,6 +1,7 @@
 import {
   FacebookAuthProvider,
   fetchSignInMethodsForEmail,
+  getAuth,
   GithubAuthProvider,
   GoogleAuthProvider,
   signInWithEmailAndPassword,
@@ -92,7 +93,7 @@ const SignIn = () => {
       default:
         return;
     }
-    // const auth = getAuth();
+    const auth = getAuth();
 
     try {
       const result = await signInWithPopup(auth, provider);

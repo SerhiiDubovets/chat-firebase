@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-import { flexCenter, flexColumn } from "@/styles/mixins";
+import { flexColumn } from "@/styles/mixins";
 
-export const SingUpSkeletonStyle = styled.div`
+export const SkeletonSingUpStyle = styled.div`
   ${flexColumn}
   padding-block: 1.25rem;
   padding-inline: 1.25rem;
@@ -28,10 +28,10 @@ export const TitleBlockSkeletonStyle = styled.div`
 export const FormSkeletonStyle = styled.div`
   ${flexColumn}
   justify-content: center;
-  margin-block-end: 2rem;
+  margin-bottom: 2rem;
 `;
 
-export const SkeletonBlockBtn = styled.div`
-  ${flexCenter}
-  gap: 1rem;
+export const ButtonSkeletonStyle = styled.div`
+  ${flexColumn};
+  align-items: center;
 `;

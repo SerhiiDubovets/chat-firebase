@@ -1,4 +1,4 @@
-import { Skeleton } from "@/components/skeleton/Skeleton";
+import { Skeleton } from "@/components/skeletons/skeleton/Skeleton";
 import {
   FormSkeletonStyle,
   SingUpSkeletonStyle,
@@ -22,9 +22,7 @@ export const LoadingSkeletonSignIn = () => {
       <Skeleton width="100%" height="2.5rem" marginBEnd="2rem" />
       <Skeleton width="100%" height="0.8rem" marginBEnd="2rem" />
       <SkeletonBlockBtn>
-        <Skeleton width="100%" height="3rem" marginBEnd="0rem" />
-        <Skeleton width="100%" height="3rem" marginBEnd="0rem" />
-        <Skeleton width="100%" height="3rem" marginBEnd="0rem" />
+        <Skeleton width="50%" height="3rem" marginBEnd="0rem" />
       </SkeletonBlockBtn>
     </SingUpSkeletonStyle>
   );

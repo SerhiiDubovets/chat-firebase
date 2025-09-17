@@ -20,7 +20,6 @@ import {
   UserDetailStyle,
   UserStyle,
 } from "./addUser.style";
-// import { useUserStore } from "../../../../lib/userStore";
 
 interface User {
   id: string;
@@ -33,6 +32,8 @@ const AddUser = () => {
   const { currentUser } = useUserStore();
 
   const handleSearch = async (e: React.FormEvent<HTMLFormElement>) => {
+    console.log("click");
+
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const username = formData.get("username") as string;
@@ -57,6 +58,7 @@ const AddUser = () => {
   const handleAdd = async () => {
     const chatRef = collection(db, "chats");
     const userChatsRef = collection(db, "userchats");
+    console.log(chatRef);
 
     try {
       const newChatRef = doc(chatRef);
