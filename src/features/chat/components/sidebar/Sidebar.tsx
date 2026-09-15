@@ -11,7 +11,6 @@ import { SidebarProps } from "./sidebar.types";
 
 export const Sidebar = ({ input, setInput }: SidebarProps) => {
   const { sidebarView } = useSettingsStore();
-  console.log("Sidebar");
 
   return (
     <S.Sidebar>
