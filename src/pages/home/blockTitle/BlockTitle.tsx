@@ -1,4 +1,5 @@
-import { LogoWhite } from "@/components/logo/Logo";
+import { LogoWhite } from "@shared/ui/logo/Logo";
+
 import {
   BlockTitleStyle,
   LogoStyle,

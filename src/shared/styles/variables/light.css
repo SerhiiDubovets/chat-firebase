@@ -1,0 +1,31 @@
+:root {
+  --bg-primary: hsl(148, 43%, 17%);
+  --bg-secondary: hsl(0, 0%, 90%);
+  --bg-input: hsl(147, 13%, 51%, 13%);
+  --bg-image: hsl(0, 0%, 100%);
+  --bg-separator: hsl(0, 0%, 100%, 0.2);
+
+  --text-primary: hsl(0, 0%, 0%);
+  --text-secondary: hsl(0, 0%, 100%);
+  --text-primary-mute: hsl(0, 0%, 65%);
+  --text-secondary-mute: hsl(0, 0%, 65%);
+  --text-separator-mute: hsl(0, 0%, 75%);
+
+  --hover-primary: hsl(147, 13%, 51%, 13%);
+  /* --hover-primary: hsla(207, 4%, 46%, 0.078); */
+
+  --border: #e5e7eb;
+  --border-separate: hsla(0, 0%, 70%);
+  --border-avatar: hsl(165.65deg 71.88% 37.65%);
+
+  --primary: #4f46e5;
+
+  --bubble-incoming: hsl(104, 22%, 87%);
+  --bubble-outgoing: hsl(105, 24%, 77%);
+  --bubble-data-incoming: hsl(0, 0%, 50%);
+  --bubble-data-outgoing: hsl(114, 34%, 49%);
+
+  --success: #16a34a;
+  --warning: #f59e0b;
+  --error: #ef4444;
+}

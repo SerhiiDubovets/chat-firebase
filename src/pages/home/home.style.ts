@@ -1,25 +1,20 @@
-import backgroundDesk from "@assets/backgroundDesk.jpg";
-import background from "@assets/backgroundHome.jpg";
 import styled from "styled-components";
 
-import { Button as BaseButton } from "@/components/buttons/button/Button";
-
-import { ButtonIcon } from "@/components/buttons/buttonIcon/ButtonIcon";
+import backgroundDesk from "@shared/assets/images/backgroundDesk.jpg";
+import background from "@shared/assets/images/backgroundHome.jpg";
+import { flex } from "@shared/styles/mixins/mixins";
+import { ButtonIcon } from "@shared/ui/buttons/buttonIcon/ButtonIcon";
 
 export const WrapStyle = styled.div`
   position: relative;
 
-  display: flex;
-  flex-direction: column;
+  ${flex.column}
   justify-content: space-between;
 
   min-height: 100vh;
 
-  background: linear-gradient(
-      357deg,
-      rgba(0, 0, 0, 0.4) 0%,
-      rgba(0, 0, 0, 0.4) 100%
-    ),
+  background:
+    linear-gradient(357deg, rgba(0, 0, 0, 0.4) 0%, rgba(0, 0, 0, 0.4) 100%),
     url(${background}) no-repeat center/ cover;
 
   text-align: center;
@@ -29,25 +24,29 @@ export const WrapStyle = styled.div`
   @media (min-width: 768px) {
     justify-content: flex-start;
 
-    background: linear-gradient(rgba(0, 0, 0, 0.2)),
+    background:
+      linear-gradient(rgba(0, 0, 0, 0.2)),
       url(${backgroundDesk}) no-repeat center 100% / cover;
   }
 `;
 
-export const ContentBlockStyle = styled.div`
-  margin-inline-end: 1rem;
-`;
+export const ContentBlockStyle = styled.div``;
 
-export const BackBtmStyle = styled(ButtonIcon)`
+export const BackBtmStyle = styled(ButtonIcon).attrs({
+  size: "3.125rem",
+  sizeIcon: "1.5rem",
+})`
   position: absolute;
+  z-index: 20;
 
-  width: 50px;
-  height: 50px;
+  width: 3.125rem;
+  height: 3.125rem;
 
-  color: white;
   background-color: transparent;
   border: none;
   outline: none;
+
+  color: hsl(0, 0%, 100%);
 
   @media (min-width: 768px) {
     display: none;
@@ -56,19 +55,18 @@ export const BackBtmStyle = styled(ButtonIcon)`
 
 export const ImgDecStyle = styled.img`
   width: 100%;
-  margin-block-end: 20px;
+  margin-block-end: 1.25rem;
 
   @media (min-width: 768px) {
   }
 `;
 
 export const BlockLoginStyle = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  ${flex.columnCenter}
   justify-content: center;
   flex: 2;
-  padding-block: 10px;
+  padding-block: 0.625rem;
+  margin-block-start: 1.5rem;
 
   @media (min-width: 768px) {
     display: none;
@@ -86,14 +84,17 @@ export const BlockImgStyle = styled.div`
 
 export const ImgStyle = styled.img`
   width: 100%;
+
+  @media (min-width: 650px) {
+    width: 80%;
+  }
 `;
 
 export const BlockBtnStyle = styled.div`
   display: none;
+
   @media (min-width: 768px) {
     display: flex;
     margin-block-end: 1rem;
   }
 `;
-
-export const ButtonStyle = styled(BaseButton)``;

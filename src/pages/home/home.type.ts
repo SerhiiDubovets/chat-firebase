@@ -2,7 +2,7 @@ import React from "react";
 
 import { LinkProps } from "react-router-dom";
 
-import { ButtonVariant } from "@/types/types";
+import { ButtonVariant } from "@shared/types/common.types";
 
 export interface SlideProps {
   $showSlide: boolean;

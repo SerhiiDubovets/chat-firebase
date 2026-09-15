@@ -1,0 +1,66 @@
+{
+  "kind": "identitytoolkit#DownloadAccountResponse",
+  "users": [
+    {
+      "localId": "7zG9uMLlQRISasnN5LgGaNSmrD7H",
+      "createdAt": "1777629949655",
+      "lastLoginAt": "1781694288933",
+      "passwordHash": "fakeHash:salt=fakeSaltMJvOXusz1Ysk3phiRXLm:password=1234567890",
+      "salt": "fakeSaltMJvOXusz1Ysk3phiRXLm",
+      "passwordUpdatedAt": 1783847880646,
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "samuray1@mon.com",
+          "federatedId": "samuray1@mon.com",
+          "rawId": "samuray1@mon.com"
+        }
+      ],
+      "validSince": "1783847880",
+      "email": "samuray1@mon.com",
+      "emailVerified": false,
+      "disabled": false
+    },
+    {
+      "localId": "ETAiHwTDs4dKrvizljCQZDstPIY1",
+      "createdAt": "1776934057255",
+      "lastLoginAt": "1776934371641",
+      "passwordHash": "fakeHash:salt=fakeSaltgSnguP66399dxvZJx91z:password=1234567890",
+      "salt": "fakeSaltgSnguP66399dxvZJx91z",
+      "passwordUpdatedAt": 1783847880647,
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "sergio.dubovets@gmail.com",
+          "federatedId": "sergio.dubovets@gmail.com",
+          "rawId": "sergio.dubovets@gmail.com"
+        }
+      ],
+      "validSince": "1783847880",
+      "email": "sergio.dubovets@gmail.com",
+      "emailVerified": false,
+      "disabled": false
+    },
+    {
+      "localId": "jtC0b0k39lK21MlZzHAJRXTkTyCK",
+      "createdAt": "1776934792235",
+      "lastLoginAt": "1782145668387",
+      "passwordHash": "fakeHash:salt=fakeSaltRVxOwyau1jkR3wAJbQJx:password=1234567890",
+      "salt": "fakeSaltRVxOwyau1jkR3wAJbQJx",
+      "passwordUpdatedAt": 1783847880647,
+      "providerUserInfo": [
+        {
+          "providerId": "password",
+          "email": "anna@gmail.com",
+          "federatedId": "anna@gmail.com",
+          "rawId": "anna@gmail.com"
+        }
+      ],
+      "validSince": "1783847880",
+      "email": "anna@gmail.com",
+      "emailVerified": false,
+      "disabled": false,
+      "lastRefreshAt": "2026-07-12T11:46:56.638Z"
+    }
+  ]
+}

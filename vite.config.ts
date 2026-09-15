@@ -16,10 +16,29 @@
 //     },
 //   },
 // });
+
+// import { defineConfig } from "vite";
+// import react from "@vitejs/plugin-react";
+// import tsconfigPaths from "vite-tsconfig-paths";
+
+// export default defineConfig({
+//   plugins: [react(), tsconfigPaths()],
+// });
+
+import path from "path";
+import { fileURLToPath } from "url";
 import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tsconfigPaths from "vite-tsconfig-paths";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
-  plugins: [react(), tsconfigPaths()],
+  resolve: {
+    alias: {
+      "@": path.resolve(__dirname, "src"),
+      "@app": path.resolve(__dirname, "src/app"),
+      "@pages": path.resolve(__dirname, "src/pages"),
+      "@features": path.resolve(__dirname, "src/features"),
+      "@shared": path.resolve(__dirname, "src/shared"),
+    },
+  },
 });

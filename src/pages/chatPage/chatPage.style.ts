@@ -1,15 +1,11 @@
 import styled from "styled-components";
 
-interface ChatContainerProps {
-  $isDetailOpen: boolean;
-}
+export const ChatWrap = styled.div`
+  position: relative;
 
-export const ChatContainer = styled.div<ChatContainerProps>`
   display: grid;
-  grid-template-columns: ${({ $isDetailOpen }) =>
-    $isDetailOpen ? "320px 1fr 280px" : "320px 1fr"};
-  /* grid-template-columns: 320px 1fr 280px; */
-  height: 100vh;
-  background-color: #1c1d22;
-  color: #fff;
+  grid-template-columns: ${({ theme }) => `${theme.sizes.sidePanel} 1fr`};
+
+  min-height: 100dvh;
+  overflow: hidden;
 `;

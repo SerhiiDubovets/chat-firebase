@@ -1,20 +1,19 @@
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/inter/700.css";
 import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import { ThemeProvider } from "styled-components";
 
-import App from "@/App";
-import { GlobalStyle } from "@/styles/global";
-import { theme } from "@/styles/theme";
+import App from "@app/App";
+import { AppProviders } from "@app/providers";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@shared/styles/variables/index.css";
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   // <React.StrictMode>
-  <BrowserRouter future={{ v7_startTransition: true }}>
-    <ThemeProvider theme={theme}>
-      <GlobalStyle />
-      <App />
-      <ToastContainer position="bottom-right" />
-    </ThemeProvider>
-  </BrowserRouter>
+  <AppProviders>
+    <App />
+  </AppProviders>,
   // </React.StrictMode>
 );

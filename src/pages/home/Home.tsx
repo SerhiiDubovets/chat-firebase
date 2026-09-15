@@ -1,7 +1,9 @@
-import Beginning from "@assets/new-beginnings.png";
 import { useState } from "react";
 
 import { GiSideswipe } from "react-icons/gi";
+
+import Beginning from "@shared/assets/images/new-beginnings.png";
+import { Button } from "@shared/ui/buttons/button/Button";
 
 import BlockSignBtn from "./blockSignBtn/BlockSignBtn";
 import { BlockTitle } from "./blockTitle/BlockTitle";
@@ -10,7 +12,6 @@ import {
   BlockBtnStyle,
   BlockImgStyle,
   BlockLoginStyle,
-  ButtonStyle,
   ContentBlockStyle,
   ImgStyle,
   WrapStyle,
@@ -27,16 +28,16 @@ const Home = () => {
   return (
     <WrapStyle>
       {showSlide && (
-        <BackBtmStyle sizeIcon="24px" color="#fff" onClick={handleShowSlide}>
+        <BackBtmStyle onClick={handleShowSlide}>
           <GiSideswipe />
         </BackBtmStyle>
       )}
       <ContentBlockStyle>
         <BlockTitle />
         <BlockLoginStyle>
-          <ButtonStyle onClick={handleShowSlide} variant="primary">
+          <Button onClick={handleShowSlide} variant="primary">
             Start chat
-          </ButtonStyle>
+          </Button>
         </BlockLoginStyle>
       </ContentBlockStyle>
       <BlockImgStyle>
@@ -45,7 +46,7 @@ const Home = () => {
       <BlockBtnStyle>
         <BlockSignBtn />
       </BlockBtnStyle>
-      <MobSlidePanel show={showSlide} />
+      <MobSlidePanel open={showSlide} onOpenChange={setShowSlide} />
     </WrapStyle>
   );
 };

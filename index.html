@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,23 @@
 
     <meta name="description" content="React Firebase chat app" />
     <meta name="theme-color" content="#1e1e2f" />
+
+    <script>
+      (() => {
+        const savedTheme = localStorage.getItem("theme");
+
+        if (savedTheme === "light" || savedTheme === "dark") {
+          document.documentElement.dataset.theme = savedTheme;
+          return;
+        }
+
+        const isDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+
+        document.documentElement.dataset.theme = isDark ? "dark" : "light";
+      })();
+    </script>
 
     <link
       rel="stylesheet"

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
-import { ButtonStyle } from "@/components/buttons/button/button.style";
+import { ButtonStyle } from "@shared/ui/buttons/button/button.style";
+
 import { BlockSignBtnLinkStyleProps } from "./blockSignBtn.types";
 
 export const BlockBtnStyle = styled.div`
@@ -17,5 +18,5 @@ export const BlockBtnStyle = styled.div`
 `;
 
 export const ButtonLinkStyle = styled(
-  ButtonStyle
+  ButtonStyle,
 )<BlockSignBtnLinkStyleProps>``;

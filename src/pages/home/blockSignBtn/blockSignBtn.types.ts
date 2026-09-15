@@ -1,5 +1,8 @@
-import { ButtonVariant } from "@/types/types";
+import React from "react";
+
 import { LinkProps } from "react-router-dom";
+
+import { ButtonVariant } from "@shared/types/common.types";
 
 export interface BlockSignBtnLinkStyleProps {
   as?:

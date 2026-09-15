@@ -1,0 +1,208 @@
+# language: "ru-RU"
+
+tone_instructions: >
+  Be concise and practical.
+  Focus on real bugs, security issues, performance problems,
+  TypeScript type safety and architectural problems.
+  Avoid nitpicky style suggestions and unnecessary refactoring.
+
+reviews:
+  profile: "chill"
+
+  request_changes_workflow: false
+
+  high_level_summary: true
+  high_level_summary_in_walkthrough: true
+
+  review_status: true
+  review_progress: true
+
+  poem: false
+
+  auto_review:
+    enabled: true
+    auto_incremental_review: true
+    drafts: false
+
+  path_filters:
+    - "!**/node_modules/**"
+    - "!**/dist/**"
+    - "!**/build/**"
+    - "!**/.firebase/**"
+    - "!**/coverage/**"
+    - "!**/*.lock"
+
+  path_instructions:
+    - path: "src/**/*.tsx"
+      instructions: |
+        This is a React + TypeScript application.
+
+        Check for:
+        - incorrect React patterns
+        - unnecessary re-renders
+        - incorrect useEffect dependencies
+        - stale closures
+        - incorrect hook usage
+        - unnecessary state
+        - unsafe nullable value access
+        - missing list keys
+        - incorrect memoization
+        - business logic inside presentation components
+
+        Prefer simple and readable React code.
+        Do not suggest refactoring only for stylistic reasons.
+
+    - path: "src/features/**"
+      instructions: |
+        The project uses an FSD-like architecture.
+
+        Features contain business functionality.
+
+        Check for:
+        - incorrect dependency direction
+        - cross-feature coupling
+        - duplicated business logic
+        - business logic inside UI components
+        - unnecessary dependencies between features
+        - state management problems
+        - error handling problems
+        - TypeScript type safety
+
+        Do not suggest moving code between layers
+        unless there is a clear architectural reason.
+
+    - path: "src/features/auth/**"
+      instructions: |
+        Authentication uses Firebase Authentication.
+
+        Pay special attention to:
+        - email/password authentication
+        - Google, GitHub and Facebook providers
+        - account linking
+        - existing accounts with the same email
+        - Firebase Auth errors
+        - loading states
+        - race conditions
+        - duplicate user creation
+        - security-sensitive logic
+
+        Verify that Firebase Auth state and application state
+        remain consistent.
+
+    - path: "src/features/chat/**"
+      instructions: |
+        This is the main chat functionality.
+
+        Firestore structure:
+
+        chats/{chatId}
+        chats/{chatId}/messages/{messageId}
+
+        A chat document ID represents a conversation,
+        not a user.
+
+        Check carefully for:
+        - confusing chatId with userId
+        - incorrect Firestore paths
+        - unnecessary Firestore reads
+        - unnecessary writes
+        - race conditions
+        - duplicate messages
+        - message ordering problems
+        - seen/unread state problems
+        - batch write problems
+        - incorrect async handling
+        - inconsistent chat metadata
+
+    - path: "src/features/chat/services/**"
+      instructions: |
+        Chat services contain business logic.
+
+        Check for:
+        - duplicated Firestore logic
+        - inconsistent updates between messages and chat metadata
+        - race conditions
+        - incorrect batch writes
+        - incorrect serverTimestamp usage
+        - error handling
+
+        When writeBatch is used, verify that related
+        Firestore updates remain atomic.
+
+    - path: "src/shared/api/firestore/**"
+      instructions: |
+        Firestore access is separated into API/service layers.
+
+        Check carefully for:
+        - incorrect collection paths
+        - incorrect document paths
+        - incorrect document references
+        - inefficient queries
+        - unnecessary reads/writes
+        - incorrect query constraints
+        - serverTimestamp problems
+        - nullable Firestore fields
+        - mismatch between Firestore data and TypeScript types
+
+        Avoid suggesting direct Firestore access from UI components.
+
+    - path: "src/**/store/**"
+      instructions: |
+        The project uses Zustand.
+
+        Check for:
+        - unnecessary global state
+        - duplicated state
+        - stale state
+        - incorrect selectors
+        - unnecessary subscriptions
+        - excessive component re-renders
+        - mixing unrelated responsibilities
+
+        Keep stores focused and predictable.
+
+    - path: "src/shared/ui/**"
+      instructions: |
+        Shared UI components must remain reusable.
+
+        Check for:
+        - feature-specific dependencies
+        - business logic inside shared components
+        - excessive complexity
+        - poor prop design
+        - duplicated UI logic
+        - accessibility problems
+
+        Shared components should not depend on specific
+        chat or authentication features.
+
+    - path: "src/app/**"
+      instructions: |
+        The app layer contains providers, routing and
+        global application infrastructure.
+
+        Check for:
+        - incorrect provider ordering
+        - authentication initialization problems
+        - routing problems
+        - unnecessary global state
+        - unnecessary side effects
+        - circular dependencies
+
+    - path: "src/**/*.ts"
+      instructions: |
+        Pay special attention to TypeScript type safety.
+
+        Check for:
+        - any
+        - unsafe type assertions
+        - non-null assertions (!)
+        - incorrect nullable types
+        - impossible states
+        - duplicated types
+        - API types that do not match Firestore data
+
+        Prefer type-safe solutions over type assertions.
+
+chat:
+  auto_reply: true

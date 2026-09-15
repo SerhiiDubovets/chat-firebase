@@ -1,3 +1,4 @@
 export interface MobSlidePanelProps {
-  show: boolean;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
