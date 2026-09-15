@@ -1,28 +1,9 @@
 language: "ru-RU"
 
 tone_instructions: >
-  Be concise and practical.
-
-  Prioritize real bugs, runtime errors, security issues,
-  Firebase/Firestore correctness, React behavior, TypeScript safety,
-  performance problems and architectural violations.
-
-  Do not report minor stylistic issues unless they can cause
-  maintenance problems.
-
-  Do not suggest refactoring just because another implementation
-  is possible.
-
-  Do not suggest changes merely to make code "cleaner" if the
-  existing implementation is correct and consistent with the project.
-
-  Respect the existing project architecture and technologies.
-
-  Prefer concrete evidence from the changed code over speculative
-  problems.
-
-  When reporting an issue, explain the actual consequence and,
-  when useful, provide a concise fix.
+  Be concise and practical. Prioritize real bugs, security, Firebase/Firestore,
+  React, TypeScript, performance and architecture. Avoid speculative or minor
+  stylistic issues. Respect the existing project architecture and technologies.
 
 reviews:
   profile: "chill"

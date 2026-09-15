@@ -45,6 +45,8 @@ const Chat = () => {
 
   const { chatId } = useRequiredChatId();
 
+  console.log(chatId);
+
   const { openModal } = useModalStore();
   const { isOpen } = useUserOptionsStore();
   const { isMarkedMessagesOpen, toggleMarkedMessages } = useChatStore();
