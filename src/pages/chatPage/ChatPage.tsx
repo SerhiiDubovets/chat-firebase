@@ -1,7 +1,8 @@
 import { useState } from "react";
 
 import { AnimatePresence } from "framer-motion";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+// import { Outlet, useParams } from "react-router-dom";
 
 import { DetailsPanel } from "@features/chat/components/details/components/detailsPanel/DetailPanel";
 import { Sidebar } from "@features/chat/components/sidebar/Sidebar";
@@ -11,13 +12,15 @@ import { useChatStore } from "@features/chat/store/chatStore";
 import * as S from "./chatPage.style";
 
 const ChatPage = () => {
-  const { chatId } = useParams();
+  // const { chatId } = useParams();
   const { isDetailOpen } = useChatStore();
   const [input, setInput] = useState("");
 
   const { chat: currentChat, loading: chatLoading } = useCurrentChat();
 
   const { user: newUser, loading: newUserLoading } = useNewChatUser();
+
+  console.log(chatLoading, newUserLoading);
 
   const chatUser = currentChat?.user ?? newUser;
 

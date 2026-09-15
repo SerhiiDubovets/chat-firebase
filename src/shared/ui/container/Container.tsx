@@ -6,6 +6,6 @@ interface ContainerProps {
   children: ReactNode;
 }
 
-const Container = ({ children, ...props }: ContainerProps) => {
+export const Container = ({ children, ...props }: ContainerProps) => {
   return <ContainerStyle {...props}>{children}</ContainerStyle>;
 };

@@ -1,10 +1,28 @@
-# language: "ru-RU"
+language: "ru-RU"
 
 tone_instructions: >
   Be concise and practical.
-  Focus on real bugs, security issues, performance problems,
-  TypeScript type safety and architectural problems.
-  Avoid nitpicky style suggestions and unnecessary refactoring.
+
+  Prioritize real bugs, runtime errors, security issues,
+  Firebase/Firestore correctness, React behavior, TypeScript safety,
+  performance problems and architectural violations.
+
+  Do not report minor stylistic issues unless they can cause
+  maintenance problems.
+
+  Do not suggest refactoring just because another implementation
+  is possible.
+
+  Do not suggest changes merely to make code "cleaner" if the
+  existing implementation is correct and consistent with the project.
+
+  Respect the existing project architecture and technologies.
+
+  Prefer concrete evidence from the changed code over speculative
+  problems.
+
+  When reporting an issue, explain the actual consequence and,
+  when useful, provide a concise fix.
 
 reviews:
   profile: "chill"
@@ -31,45 +49,200 @@ reviews:
     - "!**/.firebase/**"
     - "!**/coverage/**"
     - "!**/*.lock"
+    - "!**/firebase-export/**"
 
   path_instructions:
-    - path: "src/**/*.tsx"
+    # ==========================================================
+    # GLOBAL PROJECT RULES
+    # ==========================================================
+
+    - path: "src/**"
       instructions: |
-        This is a React + TypeScript application.
+        This is a React 18 + TypeScript application.
+
+        Main technologies:
+        - React
+        - TypeScript
+        - Firebase / Firestore / Firebase Auth
+        - Zustand
+        - React Hook Form
+        - React Router
+        - styled-components
+        - Framer Motion
+        - Floating UI
+
+        The project follows an FSD-like architecture.
+
+        ESLint with eslint-plugin-boundaries is the source of truth
+        for architectural dependency rules.
+
+        Respect the existing dependency direction and existing
+        project patterns.
+
+        Do not recommend introducing alternative core technologies
+        unless explicitly requested.
+
+        Do not recommend:
+        - Redux instead of Zustand
+        - another router instead of React Router
+        - another backend instead of Firebase
+        - replacing styled-components
+        - replacing React Hook Form
+        - replacing the existing FSD structure
+
+        unless the user explicitly asks for such a change.
+
+        Do not suggest abstractions or refactoring merely because
+        another implementation is possible.
+
+    # ==========================================================
+    # FSD LAYERS
+    # ==========================================================
+
+    - path: "src/app/**"
+      instructions: |
+        The app layer contains application-level infrastructure,
+        providers and routing.
 
         Check for:
-        - incorrect React patterns
-        - unnecessary re-renders
-        - incorrect useEffect dependencies
-        - stale closures
-        - incorrect hook usage
-        - unnecessary state
-        - unsafe nullable value access
-        - missing list keys
-        - incorrect memoization
-        - business logic inside presentation components
+        - incorrect provider composition
+        - provider ordering problems
+        - authentication initialization problems
+        - routing problems
+        - global side effects
+        - unnecessary global state
+        - circular dependencies
+        - incorrect application initialization
 
-        Prefer simple and readable React code.
-        Do not suggest refactoring only for stylistic reasons.
+        The app layer may depend on lower FSD layers.
+        Lower layers must not depend on app.
+
+        Do not move feature business logic into app merely to
+        simplify imports.
+
+    - path: "src/pages/**"
+      instructions: |
+        Pages compose application screens from lower-level
+        widgets, features, entities and shared modules.
+
+        Check for:
+        - business logic that should live in features
+        - duplicated composition logic
+        - incorrect dependencies
+        - unnecessary state
+        - excessive page complexity
+
+        Pages should primarily compose functionality rather than
+        contain reusable business logic.
+
+    - path: "src/widgets/**"
+      instructions: |
+        Widgets compose larger UI sections.
+
+        Check for:
+        - business logic that belongs in features
+        - dependencies on higher FSD layers
+        - unnecessary coupling
+        - excessive component complexity
+
+        Widgets may depend on features, entities and shared.
+
+        Widgets must not depend on pages or app.
 
     - path: "src/features/**"
       instructions: |
-        The project uses an FSD-like architecture.
-
         Features contain business functionality.
 
-        Check for:
-        - incorrect dependency direction
-        - cross-feature coupling
-        - duplicated business logic
-        - business logic inside UI components
-        - unnecessary dependencies between features
-        - state management problems
-        - error handling problems
-        - TypeScript type safety
+        A feature may freely use its own internal modules,
+        including its components, hooks, services, stores and types.
 
-        Do not suggest moving code between layers
-        unless there is a clear architectural reason.
+        Between FSD layers, features should depend only on
+        entities and shared.
+
+        Features must not depend on:
+        - other features
+        - widgets
+        - pages
+        - app
+
+        unless the user explicitly wants to redesign the architecture.
+
+        Check for:
+        - duplicated business logic
+        - business logic inside presentation components
+        - excessive coupling
+        - incorrect state ownership
+        - unnecessary global state
+        - error handling problems
+        - TypeScript type problems
+
+    - path: "src/entities/**"
+      instructions: |
+        Entities contain reusable domain-level models and behavior.
+
+        Check for:
+        - dependencies on higher FSD layers
+        - feature-specific business logic
+        - unnecessary coupling
+        - duplicated domain types
+
+        Entities should remain reusable and independent from
+        pages, widgets, features and app.
+
+    - path: "src/shared/**"
+      instructions: |
+        Shared code is infrastructure or generic reusable functionality.
+
+        Shared modules must not depend on:
+        - features
+        - widgets
+        - pages
+        - app
+
+        Do not move feature-specific code into shared merely because
+        it is reused once.
+
+    # ==========================================================
+    # FIRESTORE DOMAIN MODEL
+    # ==========================================================
+
+    - path: "src/**"
+      instructions: |
+        FIRESTORE DOMAIN MODEL:
+
+        User:
+          users/{userId}
+
+        Chat:
+          chats/{chatId}
+
+        Messages:
+          chats/{chatId}/messages/{messageId}
+
+        Important identifiers:
+
+        userId:
+          Firebase/application user identifier.
+
+        chatId:
+          Conversation document identifier.
+
+        messageId:
+          Message document identifier.
+
+        IMPORTANT:
+        chatId is NOT a userId.
+
+        A chat document represents a conversation, not a user.
+
+        For private chats, participants contains user IDs.
+
+        When reviewing code, always verify that these identifiers
+        are not accidentally mixed.
+
+    # ==========================================================
+    # AUTH
+    # ==========================================================
 
     - path: "src/features/auth/**"
       instructions: |
@@ -77,42 +250,108 @@ reviews:
 
         Pay special attention to:
         - email/password authentication
-        - Google, GitHub and Facebook providers
+        - Google authentication
+        - GitHub authentication
+        - Facebook authentication
         - account linking
         - existing accounts with the same email
-        - Firebase Auth errors
+        - Firebase Auth error handling
         - loading states
-        - race conditions
+        - authentication state synchronization
         - duplicate user creation
-        - security-sensitive logic
+        - race conditions
 
-        Verify that Firebase Auth state and application state
-        remain consistent.
+        Be especially careful when a user already exists with the
+        same email but a different authentication provider.
+
+        Do not expose or log sensitive authentication data.
+
+        Verify that authentication state and application user state
+        cannot become inconsistent.
+
+    # ==========================================================
+    # USER
+    # ==========================================================
+
+    - path: "src/features/user/**"
+      instructions: |
+        User functionality interacts with Firebase user state and
+        application user data.
+
+        Check for:
+        - mismatch between Firebase Auth user and application user
+        - incorrect userId handling
+        - stale user state
+        - unnecessary Firestore reads
+        - incorrect loading states
+        - race conditions
+        - presence synchronization problems
+
+        Pay special attention when authentication state changes.
+
+    # ==========================================================
+    # CHAT
+    # ==========================================================
 
     - path: "src/features/chat/**"
       instructions: |
-        This is the main chat functionality.
+        This feature contains the core chat functionality.
 
-        Firestore structure:
+        IMPORTANT DATA MODEL:
 
         chats/{chatId}
+
         chats/{chatId}/messages/{messageId}
 
-        A chat document ID represents a conversation,
-        not a user.
+        chatId is the ID of the conversation document.
+        chatId is NOT a userId.
 
         Check carefully for:
-        - confusing chatId with userId
+        - confusing chatId and userId
         - incorrect Firestore paths
-        - unnecessary Firestore reads
-        - unnecessary writes
-        - race conditions
+        - incorrect document references
         - duplicate messages
-        - message ordering problems
+        - incorrect message ordering
+        - stale chat metadata
         - seen/unread state problems
-        - batch write problems
+        - race conditions
+        - unnecessary Firestore reads
+        - unnecessary Firestore writes
         - incorrect async handling
-        - inconsistent chat metadata
+        - inconsistent state after sending/editing/deleting messages
+
+        When changing message logic, also consider whether
+        chat-level metadata must be updated.
+
+        Do not move business logic into React components merely
+        to make components shorter.
+
+    # ==========================================================
+    # CHAT DETAIL
+    # ==========================================================
+
+    - path: "src/features/chatDetail/**"
+      instructions: |
+        Chat detail functionality works with a specific chatId.
+
+        Always distinguish:
+        - chatId = conversation document ID
+        - userId = Firebase user ID
+
+        Check for:
+        - incorrect route parameters
+        - stale chat subscriptions
+        - incorrect cleanup of Firestore listeners
+        - unnecessary re-subscriptions
+        - message loading problems
+        - incorrect empty/loading/error states
+
+        Pay special attention to useEffect dependencies around
+        chat subscriptions.
+
+    # ==========================================================
+    # CHAT SERVICES
+    # ==========================================================
 
     - path: "src/features/chat/services/**"
       instructions: |
@@ -120,89 +359,313 @@ reviews:
 
         Check for:
         - duplicated Firestore logic
-        - inconsistent updates between messages and chat metadata
+        - inconsistent chat/message updates
         - race conditions
-        - incorrect batch writes
+        - incorrect batch operations
         - incorrect serverTimestamp usage
-        - error handling
+        - missing error handling
+        - unnecessary reads/writes
 
-        When writeBatch is used, verify that related
-        Firestore updates remain atomic.
+        When a message operation also updates chat metadata,
+        verify that all related updates remain logically consistent.
+
+        For Firestore writeBatch operations:
+        - verify that all writes belong to the same logical operation
+        - verify document references
+        - verify chatId usage
+        - verify serverTimestamp fields
+        - check that chat metadata and message data stay consistent
+        - do not assume that individual writes can fail independently
+
+        Do not move this business logic into React components merely
+        to make the component shorter.
+
+    # ==========================================================
+    # FIRESTORE API
+    # ==========================================================
 
     - path: "src/shared/api/firestore/**"
       instructions: |
-        Firestore access is separated into API/service layers.
+        This project keeps Firestore access in dedicated
+        API/collection/document layers.
+
+        Treat these files as infrastructure.
 
         Check carefully for:
         - incorrect collection paths
         - incorrect document paths
         - incorrect document references
+        - wrong chatId/userId usage
         - inefficient queries
-        - unnecessary reads/writes
+        - unnecessary reads
+        - unnecessary writes
         - incorrect query constraints
+        - missing ordering
         - serverTimestamp problems
-        - nullable Firestore fields
+        - nullable fields
         - mismatch between Firestore data and TypeScript types
+        - incorrect realtime listener cleanup
 
-        Avoid suggesting direct Firestore access from UI components.
+        Prefer keeping direct Firestore operations inside the
+        existing API/service infrastructure.
+
+        Avoid introducing circular dependencies between:
+        - API modules
+        - mappers
+        - collections
+        - document references
+        - barrel index files
+
+        Be especially careful when importing from broad barrel files
+        such as index.ts inside the same dependency graph.
+
+        Prefer a direct module import when a barrel import can create
+        a circular dependency.
+
+    # ==========================================================
+    # FIRESTORE MESSAGES
+    # ==========================================================
+
+    - path: "src/shared/api/firestore/api/messages.api.ts"
+      instructions: |
+        Messages are stored under:
+
+        chats/{chatId}/messages/{messageId}
+
+        Pay special attention to:
+        - chatId correctness
+        - message ordering
+        - realtime subscriptions
+        - deleted messages
+        - deletedFor user state
+        - editing messages
+        - batch updates
+        - serverTimestamp
+        - Firestore query efficiency
+
+        When changing this API, check its callers because message
+        behavior is used by multiple parts of the chat.
+
+    # ==========================================================
+    # ZUSTAND
+    # ==========================================================
 
     - path: "src/**/store/**"
       instructions: |
-        The project uses Zustand.
+        The project uses Zustand for application state.
 
         Check for:
-        - unnecessary global state
         - duplicated state
+        - unnecessary global state
         - stale state
         - incorrect selectors
         - unnecessary subscriptions
         - excessive component re-renders
         - mixing unrelated responsibilities
+        - actions containing unrelated business logic
 
-        Keep stores focused and predictable.
+        Prefer focused stores with clear responsibilities.
+
+        Do not suggest Redux or another state management library.
+
+    # ==========================================================
+    # SHARED UI
+    # ==========================================================
 
     - path: "src/shared/ui/**"
       instructions: |
-        Shared UI components must remain reusable.
+        Shared UI components must remain generic and reusable.
 
         Check for:
         - feature-specific dependencies
-        - business logic inside shared components
-        - excessive complexity
+        - business logic
+        - unnecessary coupling
+        - excessive component complexity
         - poor prop design
-        - duplicated UI logic
+        - duplicated UI behavior
         - accessibility problems
 
-        Shared components should not depend on specific
-        chat or authentication features.
+        Shared UI must not depend on:
+        - features
+        - pages
+        - widgets
+        - app
 
-    - path: "src/app/**"
-      instructions: |
-        The app layer contains providers, routing and
-        global application infrastructure.
+        Do not move feature-specific UI into shared simply because
+        it is reused once.
 
-        Check for:
-        - incorrect provider ordering
-        - authentication initialization problems
-        - routing problems
-        - unnecessary global state
-        - unnecessary side effects
-        - circular dependencies
+    # ==========================================================
+    # TYPESCRIPT
+    # ==========================================================
 
     - path: "src/**/*.ts"
       instructions: |
-        Pay special attention to TypeScript type safety.
+        TypeScript is a core part of this project.
 
-        Check for:
+        Pay special attention to:
         - any
         - unsafe type assertions
         - non-null assertions (!)
         - incorrect nullable types
         - impossible states
-        - duplicated types
+        - duplicated domain types
+        - incorrect generic types
         - API types that do not match Firestore data
 
         Prefer type-safe solutions over type assertions.
+
+        Do not recommend adding types that merely duplicate an
+        already existing domain type.
+
+        Do not recommend any, @ts-ignore or @ts-expect-error merely
+        to silence a TypeScript error.
+
+    # ==========================================================
+    # REACT
+    # ==========================================================
+
+    - path: "src/**/*.tsx"
+      instructions: |
+        Check React code for actual correctness problems.
+
+        Pay special attention to:
+        - incorrect hooks
+        - incorrect useEffect dependencies
+        - stale closures
+        - subscription cleanup
+        - unnecessary re-renders
+        - incorrect state synchronization
+        - unsafe nullable values
+        - missing list keys
+        - incorrect controlled/uncontrolled behavior
+
+        Do NOT report useMemo or useCallback simply because they exist.
+
+        Do NOT recommend removing memoization without evidence that
+        it is unnecessary.
+
+        Prefer readable React code over excessive abstraction.
+
+        Do not suggest extracting components or hooks merely because
+        a component could theoretically be shorter.
+
+    # ==========================================================
+    # FORMS
+    # ==========================================================
+
+    - path: "src/**"
+      instructions: |
+        The project uses react-hook-form.
+
+        When reviewing form-related code, check for:
+        - incorrect Controller usage
+        - controlled/uncontrolled problems
+        - incorrect setValue usage
+        - incorrect reset behavior
+        - validation problems
+        - missing error handling
+        - incorrect form submission state
+
+        Do not recommend replacing react-hook-form.
+
+    # ==========================================================
+    # ROUTING
+    # ==========================================================
+
+    - path: "src/app/router/**"
+      instructions: |
+        The project uses React Router.
+
+        Check for:
+        - incorrect route parameters
+        - incorrect nested routes
+        - incorrect Outlet usage
+        - authentication route handling
+        - unnecessary redirects
+        - stale route state
+
+        For chat routes, :chatId represents a conversation document ID,
+        not a user ID.
+
+    # ==========================================================
+    # ESLINT / ARCHITECTURE
+    # ==========================================================
+
+    - path: ".eslintrc.cjs"
+      instructions: |
+        This file contains important architectural rules.
+
+        eslint-plugin-boundaries defines the project's dependency
+        direction.
+
+        Treat these rules as intentional project architecture.
+
+        Do not recommend weakening or bypassing these boundaries
+        unless the user explicitly asks to redesign the architecture.
+
+    # ==========================================================
+    # PACKAGE CONFIGURATION
+    # ==========================================================
+
+    - path: "package.json"
+      instructions: |
+        Check dependency changes carefully.
+
+        Report:
+        - unnecessary dependencies
+        - suspicious dependency changes
+        - duplicated libraries
+        - dependencies that appear unused
+        - potentially incompatible versions
+
+        Do not suggest replacing the existing core stack without
+        a concrete technical reason.
+
+    # ==========================================================
+    # FIREBASE CONFIGURATION
+    # ==========================================================
+
+    - path: "firebase.json"
+      instructions: |
+        Check Firebase configuration changes carefully.
+
+        Pay attention to:
+        - emulator configuration
+        - hosting configuration
+        - accidental production configuration changes
+        - unexpected changes to Firebase services
+
+    # ==========================================================
+    # FIREBASE SECURITY RULES
+    # ==========================================================
+
+    - path: "**/*.rules"
+      instructions: |
+        Treat Firebase security rules as security-sensitive.
+
+        Check for:
+        - overly permissive access
+        - authentication bypasses
+        - users accessing another user's private data
+        - missing ownership checks
+        - chat participant validation
+        - message access without proper authorization
+
+        Verify that clients cannot forge security-sensitive fields such as:
+        - senderId
+        - participants
+        - user ownership
+        - chat membership
+        - seenBy
+        - lastMessageSenderId
+
+        Do not assume that TypeScript types or client-side validation
+        provide security.
+
+        Authorization must be enforced by Firebase security rules.
+
+        Report security issues even when they are not directly related
+        to the changed code.
 
 chat:
   auto_reply: true

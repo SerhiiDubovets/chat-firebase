@@ -1,5 +1,5 @@
 import { useSettingsStore } from "@features/settingsPanel/store/settingsStore";
-import { useUserOptionsStore } from "@features/user/store/userOptionsStore";
+// import { useUserOptionsStore } from "@features/user/store/userOptionsStore";
 import { useUserStore } from "@features/user/store/userStore";
 
 import { InfOptionsIcon } from "@shared/assets/icons/icons";
@@ -10,7 +10,7 @@ import * as S from "./sidebarHeader.style";
 
 export const SidebarHeader = () => {
   const { currentUser } = useUserStore();
-  const { openUserOptions, isOpen, closeUserOptions } = useUserOptionsStore();
+  // const { openUserOptions, isOpen, closeUserOptions } = useUserOptionsStore();
   const { setSidebarView } = useSettingsStore();
   const handleOpenOptions = () => {
     setSidebarView("settings");

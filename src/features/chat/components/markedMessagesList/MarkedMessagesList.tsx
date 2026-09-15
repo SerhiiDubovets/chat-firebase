@@ -13,16 +13,18 @@ export const MarkedMessagesList = ({
   messages,
   onHandleUnMark,
 }: MarkedMessagesListProps) => {
-  return messages?.map(({ id, createdAt, img, text }) => (
+  return messages?.map(({ id, createdAt, image, text }) => (
     <MarkedMessageStyle key={createdAt.toString()}>
       <MarkedMessageDeleteIconStyle onClick={() => onHandleUnMark(id)}>
-        <Icon color="white" size="1.25rem">
+        <Icon colorIcon="white" size="1.25rem">
           <DeleteIcon />
         </Icon>
       </MarkedMessageDeleteIconStyle>
 
       <MarkedMessageBlockStyle>
-        {img && <LazyImage width={200} height={200} src={img} alt="Image" />}
+        {image && (
+          <LazyImage width={200} height={200} src={image.url} alt="Image" />
+        )}
         {text !== "" && <p>{text}</p>}
       </MarkedMessageBlockStyle>
       {/* <TimeMessageStyle>{timeAgo(createdAt.toMillis())}</TimeMessageStyle> */}

@@ -21,7 +21,7 @@ export const SectionMedia = () => {
         <SectionMediaTitleStyle>
           Media, Links and Documents
         </SectionMediaTitleStyle>
-        <Icon size="0.625rem" color="#a4a5a7">
+        <Icon size="0.625rem" colorIcon="#a4a5a7">
           <AngleRightIcon aria-hidden={true} />
         </Icon>
       </SectionMediaBtnStyle>

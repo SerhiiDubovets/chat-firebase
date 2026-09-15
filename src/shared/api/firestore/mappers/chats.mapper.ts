@@ -2,7 +2,7 @@ import { DocumentData, QueryDocumentSnapshot } from "firebase/firestore";
 
 import { ChatItem } from "@features/chat/types/chat.types";
 
-import { usersApi } from "@shared/api/firestore/api";
+import { usersApi } from "@shared/api/firestore/api/users.api";
 import { isDefined } from "@shared/helpers/isDefined";
 
 type ChatDoc = QueryDocumentSnapshot<DocumentData>;

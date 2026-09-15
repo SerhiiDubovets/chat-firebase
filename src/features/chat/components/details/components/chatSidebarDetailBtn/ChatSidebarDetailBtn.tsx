@@ -17,11 +17,11 @@ export const ChatSidebarDetailBtn = ({
   return (
     <ChatSidebarDetailBtnStyle onClick={handleOpen}>
       <ChatSidebarDetailBtnTitleBlockStyle>
-        <Icon color="#ffffff">{children}</Icon>
+        <Icon colorIcon="#ffffff">{children}</Icon>
         <ChatSidebarDetailBtnTitleStyle>{title}</ChatSidebarDetailBtnTitleStyle>
       </ChatSidebarDetailBtnTitleBlockStyle>
       {rightIcon && (
-        <Icon color="#ffffff">
+        <Icon colorIcon="#ffffff">
           <AngleRightIcon />
         </Icon>
       )}

@@ -16,11 +16,11 @@ import {
   useNewChatUser,
 } from "@features/chat/hooks/useCurrentChat";
 import { useMessages } from "@features/chat/hooks/useMessages";
-import {
-  getMarkedMessages,
-  markMessage,
-  unMarkMessage,
-} from "@features/chat/services/markMessage";
+// import {
+//   getMarkedMessages,
+//   markMessage,
+//   unMarkMessage,
+// } from "@features/chat/services/markMessage";
 import { useChatStore } from "@features/chat/store/chatStore";
 import { MarkedMessage } from "@features/chat/types/message.types";
 import { UserOptions } from "@features/user/components/userOptions/UserOptions";
@@ -45,7 +45,7 @@ const Chat = () => {
 
   const { openModal } = useModalStore();
   const { isOpen } = useUserOptionsStore();
-  const { img, isMarkedMessagesOpen, toggleMarkedMessages } = useChatStore();
+  const { isMarkedMessagesOpen, toggleMarkedMessages } = useChatStore();
 
   const { currentUser } = useUserStore();
   const { messages, loading } = useMessages({
@@ -78,17 +78,17 @@ const Chat = () => {
   useEffect(() => {
     if (!isMarkedMessagesOpen) return;
     if (!chatId) return;
+    setMessageList([]);
+    // const fetchMarkedMessages = async () => {
+    //   try {
+    //     const list = await getMarkedMessages(chatId);
+    //     setMessageList(list?.reverse() || []);
+    //   } catch (err) {
+    //     console.error("Error fetching marked messages:", err);
+    //   }
+    // };
 
-    const fetchMarkedMessages = async () => {
-      try {
-        const list = await getMarkedMessages(chatId);
-        setMessageList(list?.reverse() || []);
-      } catch (err) {
-        console.error("Error fetching marked messages:", err);
-      }
-    };
-
-    fetchMarkedMessages();
+    // fetchMarkedMessages();
   }, [chatId, isMarkedMessagesOpen]);
 
   if (!currentUser) {
@@ -98,25 +98,28 @@ const Chat = () => {
   const handleMarkMessage = async (message: MarkedMessage) => {
     if (!currentUser) return;
     if (!chatId) return;
+    console.log(message);
 
-    const messageId = message.createdAt.seconds.toString();
-    try {
-      await markMessage(chatId, messageId, message, currentUser.id);
+    // const messageId = message.createdAt.seconds.toString();
+    // try {
+    //   await markMessage(chatId, messageId, message, currentUser.id);
 
-      console.log("Message marked!");
-    } catch (err) {
-      console.error("Failed to mark message", err);
-    }
+    //   console.log("Message marked!");
+    // } catch (err) {
+    //   console.error("Failed to mark message", err);
+    // }
   };
 
   const handleUnMarkMessage = async (id: string) => {
-    try {
-      await unMarkMessage(chatId, id);
-      setMessageList((prev) => prev.filter((m) => m.id !== id));
-      console.log("Removed from marked messages!");
-    } catch (err) {
-      console.error("Failed to remove from marked messages", err);
-    }
+    console.log(id);
+
+    // try {
+    //   await unMarkMessage(chatId, id);
+    //   setMessageList((prev) => prev.filter((m) => m.id !== id));
+    //   console.log("Removed from marked messages!");
+    // } catch (err) {
+    //   console.error("Failed to remove from marked messages", err);
+    // }
   };
 
   const handleCloseMarked = () => toggleMarkedMessages();

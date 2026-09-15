@@ -23,6 +23,6 @@ export const PickerScale = styled.div`
   }
 
   .epr-main {
-    border-radius: ${({ theme }) => theme.radii.bubble};
+    border-radius: ${({ theme }) => theme.radii.surface};
   }
 `;
