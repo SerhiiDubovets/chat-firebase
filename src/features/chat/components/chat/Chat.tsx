@@ -39,6 +39,8 @@ const Chat = () => {
   const { clearSearch } = useOutletContext<ChatOutletContext>();
   const [messageList, setMessageList] = useState<MarkedMessage[]>([]);
 
+  console.log(messageList);
+
   const endRef = useRef<HTMLDivElement | null>(null);
 
   const { chatId } = useRequiredChatId();
